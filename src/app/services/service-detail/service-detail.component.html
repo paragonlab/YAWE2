@@ -1,0 +1,41 @@
+<StackLayout class="p-4">
+  <Label [text]="'Servicio: ' + serviceName" class="text-xl font-bold mb-4"></Label>
+  
+  <SegmentedBar (selectedIndexChanged)="onModeChange($event)" class="mb-4">
+    <SegmentedBarItem title="Solicitar"></SegmentedBarItem>
+    <SegmentedBarItem title="Buscar"></SegmentedBarItem>
+  </SegmentedBar>
+
+  <StackLayout *ngIf="mode === 'request'">
+    <Label text="Selecciona la fecha:" class="text-lg mt-4 mb-2"></Label>
+    <DatePicker (dateChange)="onDateChanged($event)" [date]="selectedDate"></DatePicker>
+    
+    <Label text="Descripción del servicio:" class="text-lg mt-4 mb-2"></Label>
+    <TextView hint="Describe el servicio que necesitas..." (textChange)="onDescriptionChanged($event)" class="input input-border p-2"></TextView>
+    
+    <Label text="Presupuesto estimado:" class="text-lg mt-4 mb-2"></Label>
+    <TextField hint="Ingresa tu presupuesto" (textChange)="onBudgetChanged($event)" class="input input-border p-2"></TextField>
+    
+    <Button text="Tomar foto (opcional)" (tap)="onCameraButtonTap()" class="btn btn-primary mt-4"></Button>
+    
+    <Image [src]="imageSrc" *ngIf="imageSrc" class="w-full h-32 mt-4"></Image>
+  </StackLayout>
+
+  <StackLayout *ngIf="mode === 'search'">
+    <Label text="Catálogo de proveedores" class="text-lg mt-4 mb-2"></Label>
+    <ListView [items]="providers" class="list-group">
+      <ng-template let-provider="item">
+        <GridLayout columns="*, auto" class="list-group-item">
+          <StackLayout col="0">
+            <Label [text]="provider.name" class="font-bold"></Label>
+            <Label [text]="'Calificación: ' + provider.rating"></Label>
+            <Label [text]="'Comentarios: ' + provider.comments"></Label>
+          </StackLayout>
+          <Button col="1" text="Contactar" (tap)="onProviderSelect(provider.name)" class="btn btn-primary"></Button>
+        </GridLayout>
+      </ng-template>
+    </ListView>
+  </StackLayout>
+  
+  <Button [text]="mode === 'request' ? 'Solicitar servicio' : 'Buscar más proveedores'" (tap)="onConfirmButtonTap()" class="btn btn-primary mt-4"></Button>
+</StackLayout>

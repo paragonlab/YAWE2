@@ -1,0 +1,11 @@
+<ActionBar [title]="serviceName" class="action-bar">
+  <NavigationButton text="Atrás" android.systemIcon="ic_menu_back" (tap)="onBack()"></NavigationButton>
+</ActionBar>
+
+<StackLayout class="p-4">
+  <Label [text]="'Servicio seleccionado: ' + serviceName" class="text-xl font-bold mb-4"></Label>
+  
+  <Button text="Solicitar que me contacten" class="btn btn-primary mb-4" (tap)="onRequestContact()"></Button>
+  
+  <Button text="Buscar en contactos existentes" class="btn btn-outline" (tap)="onSearchExisting()"></Button>
+</StackLayout>

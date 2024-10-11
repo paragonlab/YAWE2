@@ -1,0 +1,33 @@
+<ActionBar title="YAWE" class="action-bar">
+  <NavigationButton visibility="hidden"></NavigationButton>
+</ActionBar>
+
+<GridLayout rows="*, auto">
+  <ScrollView row="0">
+    <StackLayout class="p-4">
+      <Label text="Bienvenido a YAWE" class="text-2xl font-bold mb-4"></Label>
+      <Label text="Solicita servicios domésticos y sencillos de forma rápida y fácil." class="text-lg mb-4"></Label>
+      
+      <Button text="Solicitar Servicio" class="btn btn-primary mb-4" (tap)="onRequestService()"></Button>
+      
+      <Label text="Servicios Destacados" class="text-xl font-bold mb-2"></Label>
+      <GridLayout rows="auto, auto" columns="*, *, *" class="mb-4">
+        <StackLayout *ngFor="let service of featuredServices; let i = index" 
+                     [row]="i < 3 ? 0 : 1" 
+                     [col]="i % 3" 
+                     class="service-item m-1" 
+                     (tap)="onServiceTap(service.name)">
+          <Image [src]="service.icon" class="service-icon"></Image>
+          <Label [text]="service.name" textWrap="true" class="service-caption"></Label>
+        </StackLayout>
+      </GridLayout>
+    </StackLayout>
+  </ScrollView>
+
+  <GridLayout row="1" columns="*, *, *, *" class="p-2 bg-gray-200">
+    <Label col="0" text="Inicio" class="text-center" (tap)="onNavigate('/home')"></Label>
+    <Label col="1" text="Servicios" class="text-center" (tap)="onNavigate('/services')"></Label>
+    <Label col="2" text="Actividad" class="text-center" (tap)="onNavigate('/activity')"></Label>
+    <Label col="3" text="Cuenta" class="text-center" (tap)="onNavigate('/account')"></Label>
+  </GridLayout>
+</GridLayout>

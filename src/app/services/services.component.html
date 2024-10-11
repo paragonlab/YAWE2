@@ -1,0 +1,32 @@
+<ActionBar title="YAWE" class="action-bar">
+  <NavigationButton visibility="hidden"></NavigationButton>
+</ActionBar>
+
+<GridLayout rows="*, auto">
+  <ScrollView row="0">
+    <StackLayout class="p-4">
+      <Label text="Servicios" class="text-2xl font-bold mb-4"></Label>
+      
+      <StackLayout *ngFor="let category of categories" class="mb-4">
+        <Label [text]="category.name" class="text-xl font-semibold mb-2"></Label>
+        <ScrollView orientation="horizontal" class="mb-2">
+          <StackLayout orientation="horizontal">
+            <StackLayout *ngFor="let service of category.services" 
+                         class="service-item mr-2" 
+                         (tap)="onServiceTap(service.name)">
+              <Image [src]="service.icon" class="service-icon"></Image>
+              <Label [text]="service.name" textWrap="true" class="service-caption"></Label>
+            </StackLayout>
+          </StackLayout>
+        </ScrollView>
+      </StackLayout>
+    </StackLayout>
+  </ScrollView>
+
+  <GridLayout row="1" columns="*, *, *, *" class="p-2 bg-gray-200">
+    <Label col="0" text="Inicio" class="text-center" (tap)="onNavigate('/home')"></Label>
+    <Label col="1" text="Servicios" class="text-center" (tap)="onNavigate('/services')"></Label>
+    <Label col="2" text="Actividad" class="text-center" (tap)="onNavigate('/activity')"></Label>
+    <Label col="3" text="Cuenta" class="text-center" (tap)="onNavigate('/account')"></Label>
+  </GridLayout>
+</GridLayout>

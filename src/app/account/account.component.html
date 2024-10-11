@@ -1,0 +1,38 @@
+<ActionBar title="YAWE" class="action-bar">
+  <NavigationButton visibility="hidden"></NavigationButton>
+</ActionBar>
+
+<GridLayout rows="*, auto">
+  <ScrollView row="0">
+    <StackLayout class="p-4">
+      <Label text="Cuenta" class="text-2xl font-bold mb-4"></Label>
+      
+      <Label text="Selecciona tu rol:" class="text-lg mb-2"></Label>
+      <GridLayout columns="*, *" class="mb-4">
+        <Button col="0" text="Contratante" 
+                [class]="!isPrestador ? 'btn-active' : 'btn-inactive'" 
+                (tap)="setRole(false)" 
+                class="m-1 text-lg p-2"></Button>
+        <Button col="1" text="Prestador de Servicios" 
+                [class]="isPrestador ? 'btn-active' : 'btn-inactive'" 
+                (tap)="setRole(true)" 
+                class="m-1 text-lg p-2"></Button>
+      </GridLayout>
+      
+      <Label [text]="roleDescription" class="text-lg mb-4" textWrap="true"></Label>
+      
+      <!-- Add more account-related options here -->
+      <Button text="Editar Perfil" class="btn btn-outline mb-2"></Button>
+      <Button text="Métodos de Pago" class="btn btn-outline mb-2"></Button>
+      <Button text="Configuración" class="btn btn-outline mb-2"></Button>
+      <Button text="Cerrar Sesión" class="btn btn-outline"></Button>
+    </StackLayout>
+  </ScrollView>
+
+  <GridLayout row="1" columns="*, *, *, *" class="p-2 bg-gray-200">
+    <Label col="0" text="Inicio" class="text-center" (tap)="onNavigate('/home')"></Label>
+    <Label col="1" text="Servicios" class="text-center" (tap)="onNavigate('/services')"></Label>
+    <Label col="2" text="Actividad" class="text-center" (tap)="onNavigate('/activity')"></Label>
+    <Label col="3" text="Cuenta" class="text-center" (tap)="onNavigate('/account')"></Label>
+  </GridLayout>
+</GridLayout>
